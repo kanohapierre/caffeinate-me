@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Customer {
     private String name;
-    private Integer distanceInMetres = 10000;
 
     public Customer(String name) {
         this.name = name;
@@ -19,24 +18,23 @@ public class Customer {
     }
 
     public void setDistanceFromShop(Integer distanceInMetres) {
-        this.distanceInMetres = distanceInMetres;
+
     }
 
     public CustomerOrderBuilder placesAnOrderFor(Order order) {
-        return new CustomerOrderBuilder(order, distanceInMetres);
+        return new CustomerOrderBuilder(order);
+
     }
 
     public static class CustomerOrderBuilder {
         private Order order;
-        private final Integer distanceInMetres;
 
-        public CustomerOrderBuilder(Order order, Integer distanceInMetres) {
+        public CustomerOrderBuilder(Order order) {
             this.order = order;
-            this.distanceInMetres = distanceInMetres;
         }
 
         public void at(CoffeeShop coffeeShop) {
-            coffeeShop.placeOrder(order, distanceInMetres);
+            coffeeShop.placeOrder(order);
         }
     }
 

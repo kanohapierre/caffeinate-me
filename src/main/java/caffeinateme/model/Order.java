@@ -9,19 +9,13 @@ public class Order {
     private final OrderStatus status;
 
     public Order(int quantity, String product, Customer customer) {
-        this(quantity,product, customer, OrderStatus.Normal);
-    }
-
-    public Order(int quantity, String product, Customer customer, OrderStatus status) {
         this.quantity = quantity;
         this.product = product;
         this.customer = customer;
-        this.status = status;
+        this.status = OrderStatus.Normal;
     }
 
-    public Order withStatus(OrderStatus status) {
-        return new Order(quantity,product,customer, status);
-    }
+
     public OrderStatus getStatus() {
         return status;
     }
