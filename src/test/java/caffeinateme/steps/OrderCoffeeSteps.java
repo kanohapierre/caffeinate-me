@@ -1,9 +1,6 @@
 package caffeinateme.steps;
 
-import caffeinateme.model.CoffeeShop;
-import caffeinateme.model.Customer;
-import caffeinateme.model.Order;
-import caffeinateme.model.OrderStatus;
+import caffeinateme.model.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
@@ -14,7 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderCoffeeSteps {
     Customer cathy = Customer.named("Cathy");
-    CoffeeShop coffeeShop = new CoffeeShop();
+    ProductCatalog productCatalog = new ProductCatalog();
+    CoffeeShop coffeeShop = new CoffeeShop(productCatalog);
     Order order;
 
     @Given("Cathy is {int} metre(s) from the coffee shop")
