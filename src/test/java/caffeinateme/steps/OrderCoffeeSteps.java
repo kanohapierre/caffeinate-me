@@ -4,6 +4,7 @@ import caffeinateme.model.CoffeeShop;
 import caffeinateme.model.Customer;
 import caffeinateme.model.Order;
 import caffeinateme.model.OrderStatus;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,7 +21,7 @@ public class OrderCoffeeSteps {
         cathy.setDistanceFromShop(distanceInMetres);
     }
 
-    @When("^Cathy (?:orders|has ordered) a (.*)")
+    @When("^Cathy (?:orders|has ordered) an? (.*)")
     public void cathy_orders_a(String orderedProduct) {
         this.order = Order.of(1,orderedProduct).forCustomer(cathy);
         cathy.placesAnOrderFor(order).at(coffeeShop);
@@ -36,5 +37,10 @@ public class OrderCoffeeSteps {
         Order cathysOrder = coffeeShop.getOrderFor(cathy)
                 .orElseThrow(() -> new AssertionError("No order found!"));
         assertThat(cathysOrder.getStatus()).isEqualTo(expectedStatus);
+    }
+
+    @And("Cathy is {int} minutes away")
+    public void customerIsMinutesAway(int etaInMinutes) {
+        coffeeShop.setCustomerETA(cathy, etaInMinutes);
     }
 }

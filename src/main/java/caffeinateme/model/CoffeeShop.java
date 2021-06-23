@@ -22,4 +22,18 @@ public class CoffeeShop {
                 .filter( order -> order.getCustomer().equals(customer))
                 .findFirst();
     }
+
+    public void setCustomerETA(Customer customer, int etaInMinutes) {
+        getOrderFor(customer).ifPresent(
+                order -> {
+                    if (etaInMinutes < 5) {
+                        order.updateStatusTo(OrderStatus.Urgent);
+                    } else if (etaInMinutes > 10) {
+                        order.updateStatusTo(OrderStatus.Normal);
+                    } else {
+                        order.updateStatusTo(OrderStatus.High);
+                    }
+                }
+        );
+    }
 }
