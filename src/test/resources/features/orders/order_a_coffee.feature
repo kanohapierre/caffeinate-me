@@ -12,7 +12,7 @@ Feature: Order a coffee
 
   Scenario Outline: Buyer orders a coffee only when they are close to the coffee shop
     Given Cathy is <distanceInMetres> metres from the coffee shop
-    When Cathy orders a large cappuccino
+    When Cathy has ordered a large cappuccino
     Then Barry should receive the order
     And Barry should know that the order is <status>
     Examples:
