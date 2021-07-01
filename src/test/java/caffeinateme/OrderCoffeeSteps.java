@@ -33,6 +33,7 @@ public class OrderCoffeeSteps {
         return OrderStatus.valueOf(statusValue);
     }
 
+
     @Then("Barry should know that the order is {order-status}")
     public void barry_should_know_that_the_order_is(OrderStatus expectedStatus) {
         assertThat(coffeeShop.getOrderFor(cathy)).isPresent();
