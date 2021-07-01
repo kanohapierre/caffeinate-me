@@ -39,7 +39,7 @@ public class OrderCoffeeSteps {
     }*/
 
     @Given("Cathy is {int} metres from the coffee shop")
-    public void cathy_is_metres_from_the_coffee_shop(Integer distanceInMetres) {
+    public void cathy_is_metres_from_the_coffee_shop(Float distanceInMetres) {
         cathy.setDistanceFromShop(distanceInMetres);
     }
 
