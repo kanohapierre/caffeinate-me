@@ -4,18 +4,19 @@ Feature: Order a coffee
   As a coffee love
   I want to be able to order my coffee in advance
 
-#  Scenario: Buyer orders a coffee when they are close to the coffee shop
-#    Given Cathy is 100 metres from the coffee shop
-#    When Cathy orders a large cappuccino
-#    Then Barry should receive the order
-#    And Barry should know that the order is Urgent
+  Scenario: Buyer orders a coffee when they are close to the coffee shop
+    Given Cathy is 100 metres from the coffee shop
+    When Cathy orders a large cappuccino
+    Then Barry should receive the order
+    And Barry should know that the order is Urgent
 
-  Scenario Outline: Buyer orders a coffee only when they are close to the coffee shop
-    Given Cathy is <distanceInMetres> metres from the coffee shop
-    When Cathy has ordered a large cappuccino
+  Scenario Outline: Customer orders are treated as high priority when the customer is close to the shop
+    Given Cathy is <distance> metres from the coffee shop
+    When Cathy orders a large cappuccino
     Then Barry should receive the order
     And Barry should know that the order is <status>
+
     Examples:
-      |distanceInMetres  |status  |
-      |50             |Urgent  |
-      |300            |Normal  |
+    |distance | status |
+    | 50      | Urgent |
+    | 300     | Normal |
