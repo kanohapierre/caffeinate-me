@@ -31,6 +31,10 @@ public class Order {
         return status;
     }
 
+    public void updateStatusTo(OrderStatus status) {
+        this.status = status;
+    }
+
     public int getQuantity() {
         return quantity;
     }

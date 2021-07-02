@@ -2,6 +2,7 @@ package caffeinateme;
 
 import caffeinateme.model.*;
 import io.cucumber.java.ParameterType;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,6 +23,11 @@ public class OrderCoffeeSteps {
     public void cathy_orders_a(String orderedProduct) {
         this.order = Order.of(1,orderedProduct).forCustomer(cathy);
         cathy.placesAnOrderFor(order).at(coffeeShop);
+    }
+
+    @And("Cathy is {int} minutes away")
+    public void customerIsMinutesAway(int etaInMinutes) {
+        coffeeShop.setCustomerETA(cathy, etaInMinutes);
     }
 
     @Then("Barry should receive the order")
