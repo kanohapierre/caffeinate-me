@@ -28,7 +28,7 @@ public class Receipt {
         return total;
     }
 
-    public List<ReceiptLineItem> getLineItems() {
+    public double getLineItems() {
         return new ArrayList<>(lineItems);
     }
 

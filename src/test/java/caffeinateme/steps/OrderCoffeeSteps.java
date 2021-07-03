@@ -1,11 +1,15 @@
 package caffeinateme.steps;
 
 import caffeinateme.model.*;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +18,7 @@ public class OrderCoffeeSteps {
     ProductCatalog productCatalog = new ProductCatalog();
     CoffeeShop coffeeShop = new CoffeeShop(productCatalog);
     Order order;
+    Receipt receipt;
 
     @Given("Cathy is {int} metre(s) from the coffee shop")
     public void cathy_is_metres_from_the_coffee_shop(Integer distanceInMetres) {
@@ -24,6 +29,20 @@ public class OrderCoffeeSteps {
     public void cathy_orders_a(String orderedProduct) {
         this.order = Order.of(1,orderedProduct).forCustomer(cathy);
         cathy.placesAnOrderFor(order).at(coffeeShop);
+    }
+
+    @DataTableType
+    public OrderItem mapRowToOrderItem(Map<String, String> entry) {
+        return new OrderItem(entry.get("Product"),
+                Integer.parseInt(entry.get("Quantity")));
+    }
+
+    @Given("^Cathy has ordered:$")
+    public void sarahHasOrdered(List<OrderItem> orders) {
+        for(OrderItem item : orders) {
+            Order order = Order.of(item.getQuantity(),item.getProduct()).forCustomer(cathy);
+            cathy.placesAnOrderFor(order).at(coffeeShop);
+        }
     }
 
     @Then("Barry should receive the order")
